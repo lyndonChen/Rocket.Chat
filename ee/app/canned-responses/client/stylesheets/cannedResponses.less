@@ -1,0 +1,143 @@
+@primary-font-color: #444444;
+@secondary-font-color: #7f7f7f;
+@info-font-color: #aaaaaa;
+
+
+section.canned-responses {
+	padding: 0;
+	overflow-x: hidden;
+}
+
+.canned-response-shortcut {
+	color: @primary-font-color;
+	font-weight: bold;
+}
+
+.canned-response-text {
+	color: @secondary-font-color;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.canned-response-shortcut-preview {
+	color: @primary-font-color;
+	font-weight: 500;
+}
+
+.canned-response-text-preview {
+	color: @secondary-font-color;
+	white-space: pre-wrap;
+	margin-top: 10px;
+	line-height: 1.5;
+}
+
+.canned-response-scope {
+	color: @info-font-color;
+}
+
+.canned-response-list li {
+	border-top: 1px solid var(--color-gray-light);
+}
+
+.canned-response-list li:first-of-type {
+	border-top: 0;
+}
+
+.canned-response-form-wrapper {
+	padding: 24px;
+	display: flex;
+}
+
+.canned-response-wrapper {
+	padding: 24px;
+}
+
+.canned-response-wrapper div {
+	line-height: 2;
+}
+
+.canned-response-buttons {
+	padding: 24px;
+	border-top: 1px solid var(--color-gray-light);
+}
+
+.rc-old .flex-tab-container .flex-tab .content > .canned-response-buttons {
+	overflow-y: hidden;
+}
+
+.canned-response-form {
+	padding: 24px;
+}
+
+.canned-response-label {
+	color: @primary-font-color;
+	font-weight: bold;
+}
+
+.canned-response-info {
+	color: @info-font-color
+}
+
+.canned-response-creator-data {
+	flex: 10 4;
+}
+
+.canned-response-delete-button {
+	flex: 3 2;
+}
+
+.canned-response-delete-button a {
+	color: @primary-font-color;
+}
+
+.canned-response-delete-button a:hover,
+.canned-response-delete-button a:active {
+	color: var(--rc-color-link-active);
+}
+
+.canned-response-form-wrapper fieldset {
+	flex: 1 1;
+}
+
+.canned-response-form-wrapper .rc-input {
+	margin-top: 20px;
+}
+
+.canned-response-buttons a {
+	width: 100%;
+}
+
+.popup-canned-response {
+	display: flex;
+	flex-flow: row wrap;
+
+	&-format {
+		flex-grow: 1;
+	}
+
+	&-description {
+		text-align: right;
+
+		font-style: italic;
+		flex-grow: 2;
+	}
+}
+
+.popup-canned-response-format {
+	flex: 2 0;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow-x: hidden;
+}
+
+.popup-canned-response-description {
+	flex: 4 0;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow-x: hidden;
+}
+
+.rc-old .page-static .content > .canned-response-list-wrapper {
+	margin-bottom: 0;
+}
