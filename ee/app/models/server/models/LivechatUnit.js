@@ -2,21 +2,44 @@ import _ from 'underscore';
 
 import LivechatDepartmentInstance, { LivechatDepartment } from '../../../../../app/models/server/models/LivechatDepartment';
 import { getUnitsFromUser } from '../../../livechat-enterprise/server/lib/units';
+import { logger } from '../../../livechat-enterprise/server/lib/logger';
 import LivechatUnitMonitors from './LivechatUnitMonitors';
 
+const addQueryRestrictions = (originalQuery = {}) => {
+	const query = { ...originalQuery, type: 'u' };
+
+	const units = getUnitsFromUser();
+	if (Array.isArray(units)) {
+		query.ancestors = { $in: units };
+		const expressions = query.$and || [];
+		const condition = { $or: [{ ancestors: { $in: units } }, { _id: { $in: units } }] };
+		query.$and = [condition, ...expressions];
+	}
+
+	return query;
+};
+
+
 export class LivechatUnit extends LivechatDepartment {
-	_addQueryRestrictions(originalQuery/* , methodName */) {
-		const query = { ...originalQuery, type: 'u' };
+	find(originalQuery, ...args) {
+		const query = addQueryRestrictions(originalQuery);
+		logger.queries.debug('LivechatUnit.find', JSON.stringify(query));
+		return this.unfilteredFind(query, ...args);
+	}
 
-		const units = getUnitsFromUser();
-		if (Array.isArray(units)) {
-			query.ancestors = { $in: units };
-			const expressions = query.$and || [];
-			const condition = { $or: [{ ancestors: { $in: units } }, { _id: { $in: units } }] };
-			query.$and = [condition, ...expressions];
-		}
+	findOne(originalQuery, ...args) {
+		const query = addQueryRestrictions(originalQuery);
+		logger.queries.debug('LivechatUnit.findOne', JSON.stringify(query));
+		return super.unfilteredFindOne(query, ...args);
+	}
 
-		return query;
+	findOneById(_id, options) {
+		const query = addQueryRestrictions({ _id });
+		return super.unfilteredFindOne(query, options);
+	}
+
+	update(...args) {
+		return this.unfilteredUpdate(...args);
 	}
 
 	createOrUpdateUnit(_id, { name, visibility }, ancestors, monitors, departments) {
@@ -77,6 +100,10 @@ export class LivechatUnit extends LivechatDepartment {
 	}
 
 	// REMOVE
+	remove(...args) {
+		return this.unfilteredRemove(...args);
+	}
+
 	removeParentAndAncestorById(parentId) {
 		const query = {
 			parentId,

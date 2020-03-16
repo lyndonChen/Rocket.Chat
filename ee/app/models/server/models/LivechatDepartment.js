@@ -13,6 +13,18 @@ LivechatDepartment.prototype.unfilteredFind = function(...args) {
 	return _find.call(this, ...args);
 };
 
+LivechatDepartment.prototype.unfilteredFindOne = function(...args) {
+	return _findOne.call(this, ...args);
+};
+
+LivechatDepartment.prototype.unfilteredUpdate = function(...args) {
+	return _update.call(this, ...args);
+};
+
+LivechatDepartment.prototype.unfilteredRemove = function(...args) {
+	return _remove.call(this, ...args);
+};
+
 onLicense('livechat-enterprise', () => {
 	LivechatDepartment.prototype.find = function(originalQuery, ...args) {
 		const query = addQueryRestrictionsToDepartmentsModel(originalQuery);

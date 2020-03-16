@@ -2,7 +2,12 @@ import { addCustomFormTemplate } from '../../../../../../app/livechat/client/vie
 import './customTemplates/livechatDepartmentCustomFieldsForm';
 import './customTemplates/livechatAgentEditCustomFieldsForm';
 import './customTemplates/livechatAgentInfoCustomFieldsForm';
+import { hasLicense } from '../../../../license/client';
 
-addCustomFormTemplate('livechatDepartmentForm', 'livechatDepartmentCustomFieldsForm');
-addCustomFormTemplate('livechatAgentEditForm', 'livechatAgentEditCustomFieldsForm');
-addCustomFormTemplate('livechatAgentInfoForm', 'livechatAgentInfoCustomFieldsForm');
+hasLicense('livechat-enterprise').then((enabled) => {
+	if (enabled) {
+		addCustomFormTemplate('livechatDepartmentForm', 'livechatDepartmentCustomFieldsForm');
+		addCustomFormTemplate('livechatAgentEditForm', 'livechatAgentEditCustomFieldsForm');
+		addCustomFormTemplate('livechatAgentInfoForm', 'livechatAgentInfoCustomFieldsForm');
+	}
+});
