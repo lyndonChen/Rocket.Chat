@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 
-import { Roles } from '../../../../app/odels';
+import { Roles } from '../../../../app/models';
 import { Logger } from '../../../../app/logger';
 import { settings } from '../../../../app/settings';
 
