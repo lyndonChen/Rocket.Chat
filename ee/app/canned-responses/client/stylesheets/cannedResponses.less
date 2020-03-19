@@ -2,33 +2,40 @@
 @secondary-font-color: #7f7f7f;
 @info-font-color: #aaaaaa;
 
-
 section.canned-responses {
-	padding: 0;
 	overflow-x: hidden;
+
+	padding: 0;
 }
 
 .canned-response-shortcut {
 	color: @primary-font-color;
+
 	font-weight: bold;
 }
 
 .canned-response-text {
-	color: @secondary-font-color;
 	overflow: hidden;
+
 	white-space: nowrap;
+
 	text-overflow: ellipsis;
+
+	color: @secondary-font-color;
 }
 
 .canned-response-shortcut-preview {
 	color: @primary-font-color;
+
 	font-weight: 500;
 }
 
 .canned-response-text-preview {
-	color: @secondary-font-color;
-	white-space: pre-wrap;
 	margin-top: 10px;
+
+	white-space: pre-wrap;
+
+	color: @secondary-font-color;
 
 	line-height: 1.5;
 }
@@ -46,8 +53,9 @@ section.canned-responses {
 }
 
 .canned-response-form-wrapper {
-	padding: 24px;
 	display: flex;
+
+	padding: 24px;
 }
 
 .canned-response-wrapper {
@@ -60,6 +68,7 @@ section.canned-responses {
 
 .canned-response-buttons {
 	padding: 24px;
+
 	border-top: 1px solid var(--color-gray-light);
 }
 
@@ -73,6 +82,7 @@ section.canned-responses {
 
 .canned-response-label {
 	color: @primary-font-color;
+
 	font-weight: bold;
 }
 
@@ -114,22 +124,29 @@ section.canned-responses {
 	flex-flow: row wrap;
 
 	&-format {
-		flex-grow: 1;
-		flex: 2 0;
-		white-space: nowrap;
-		text-overflow: ellipsis;
 		overflow-x: hidden;
+
+		flex: 2 0;
+
+		white-space: nowrap;
+
+		text-overflow: ellipsis;
+		flex-grow: 1;
 	}
 
 	&-description {
+		overflow-x: hidden;
+
+		flex: 4 0;
+
 		text-align: right;
+
+		white-space: nowrap;
+
+		text-overflow: ellipsis;
 
 		font-style: italic;
 		flex-grow: 2;
-		flex: 4 0;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		overflow-x: hidden;
 	}
 }
 
