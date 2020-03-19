@@ -5,9 +5,15 @@ import { Template } from 'meteor/templating';
 
 import { modal } from '../../../../../app/ui-utils';
 import { t, handleError, APIClient } from '../../../../../app/utils';
+import { hasLicense } from '../../../license/client';
 import './livechatTags.html';
 
 const ITEMS_COUNT = 50;
+const licenseEnabled = new ReactiveVar(false);
+
+hasLicense('livechat-enterprise').then((enabled) => {
+	licenseEnabled.set(enabled);
+});
 
 Template.livechatTags.helpers({
 	tags() {
@@ -24,6 +30,9 @@ Template.livechatTags.helpers({
 				instance.offset.set(instance.offset.get() + ITEMS_COUNT);
 			}
 		};
+	},
+	hasLicense() {
+		return licenseEnabled.get();
 	},
 });
 

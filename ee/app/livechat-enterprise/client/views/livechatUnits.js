@@ -5,9 +5,15 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import { modal } from '../../../../../app/ui-utils';
 import { t, handleError, APIClient } from '../../../../../app/utils';
+import { hasLicense } from '../../../license/client';
 import './livechatUnits.html';
 
 const ITEMS_COUNT = 50;
+const licenseEnabled = new ReactiveVar(false);
+
+hasLicense('livechat-enterprise').then((enabled) => {
+	licenseEnabled.set(enabled);
+});
 
 Template.livechatUnits.helpers({
 	units() {
@@ -24,6 +30,9 @@ Template.livechatUnits.helpers({
 				instance.offset.set(instance.offset.get() + ITEMS_COUNT);
 			}
 		};
+	},
+	hasLicense() {
+		return licenseEnabled.get();
 	},
 });
 

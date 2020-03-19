@@ -6,7 +6,14 @@ import _ from 'underscore';
 import toastr from 'toastr';
 
 import { t, handleError, APIClient } from '../../../../../app/utils';
+import { hasLicense } from '../../../license/client';
 import './livechatTagForm.html';
+
+const licenseEnabled = new ReactiveVar(false);
+
+hasLicense('livechat-enterprise').then((enabled) => {
+	licenseEnabled.set(enabled);
+});
 
 const availableDepartments = () => {
 	const selected = Template.instance().selectedDepartments.get().map((dept) => dept._id);
@@ -30,6 +37,9 @@ Template.livechatTagForm.helpers({
 	availableDepartments,
 	hasAvailableDepartments() {
 		return availableDepartments().length > 0;
+	},
+	hasLicense() {
+		return licenseEnabled.get();
 	},
 });
 

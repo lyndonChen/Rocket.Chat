@@ -6,7 +6,14 @@ import _ from 'underscore';
 
 import { modal, call } from '../../../../../app/ui-utils';
 import { t, handleError, APIClient } from '../../../../../app/utils';
+import { hasLicense } from '../../../license/client';
 import './livechatMonitors.html';
+
+const licenseEnabled = new ReactiveVar(false);
+
+hasLicense('livechat-enterprise').then((enabled) => {
+	licenseEnabled.set(enabled);
+});
 
 const ITEMS_COUNT = 50;
 const DEBOUNCE_TIME_TO_SEARCH_IN_MS = 300;
@@ -72,6 +79,9 @@ Template.livechatMonitors.helpers({
 				instance.offset.set(instance.offset.get() + ITEMS_COUNT);
 			}
 		};
+	},
+	hasLicense() {
+		return licenseEnabled.get();
 	},
 });
 

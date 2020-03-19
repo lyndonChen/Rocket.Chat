@@ -6,7 +6,14 @@ import _ from 'underscore';
 import toastr from 'toastr';
 
 import { t, handleError, APIClient } from '../../../../../app/utils';
+import { hasLicense } from '../../../license/client';
 import './livechatUnitForm.html';
+
+const licenseEnabled = new ReactiveVar(false);
+
+hasLicense('livechat-enterprise').then((enabled) => {
+	licenseEnabled.set(enabled);
+});
 
 const availableDepartments = () => {
 	const unit = Template.instance().unit.get();
@@ -72,6 +79,9 @@ Template.livechatUnitForm.helpers({
 	},
 	onClickTagMonitors() {
 		return Template.instance().onClickTagMonitors;
+	},
+	hasLicense() {
+		return licenseEnabled.get();
 	},
 });
 
